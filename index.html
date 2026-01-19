@@ -1,94 +1,111 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>THE VIRUS AI</title>
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- SheetJS (xlsx-js-style) library for Excel export with Styles -->
-    <script src="https://cdn.jsdelivr.net/npm/xlsx-js-style@1.2.0/dist/xlsx.bundle.js"></script>
-    <!-- Google Fonts (Inter) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Heroicons -->
-    <script src="https://unpkg.com/heroicons@2.1.1/24/outline/index.js"></script>
 
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #050214;
-            background-image: radial-gradient(circle at top left, rgba(67, 56, 202, 0.3), transparent 30%), radial-gradient(circle at bottom right, rgba(109, 40, 217, 0.2), transparent 40%);
-        }
-        .glow-border {
-            position: relative;
-        }
-        .glow-border::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            border-radius: 0.75rem; /* 12px */
-            border: 1px solid transparent;
-            background: linear-gradient(to right, rgba(109, 40, 217, 0.5), rgba(67, 56, 202, 0.5)) border-box;
-            -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: destination-out;
-            mask-composite: exclude;
-            z-index: -1;
-            transition: all 0.3s ease;
-        }
-        .glow-border:hover::before {
-             box-shadow: 0 0 15px rgba(109, 40, 217, 0.5);
-        }
-        .btn-glow {
-             background-image: linear-gradient(to right, #4f46e5, #7c3aed);
-             transition: all 0.3s ease;
-        }
-        .btn-glow:hover {
-            box-shadow: 0 0 20px rgba(109, 40, 217, 0.6);
-            transform: translateY(-2px);
-        }
-        .tab-active {
-            position: relative;
-            color: #c4b5fd; /* violet-300 */
-        }
-        .tab-active::after {
-            content: '';
-            position: absolute;
-            bottom: -1px;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background-color: #8b5cf6; /* violet-500 */
-            box-shadow: 0 0 10px #8b5cf6;
-        }
-        
-        .spinner {
-            border: 3px solid rgba(255, 255, 255, 0.2);
-            border-radius: 50%;
-            border-top-color: #c4b5fd;
-            width: 20px;
-            height: 20px;
-            animation: spin 1s linear infinite;
-        }
-        .wht-spinner {
-            border: 4px solid rgba(255, 255, 255, 0.1);
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            border-left-color: #8b5cf6;
-            animation: spin 1s ease infinite;
-        }
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Remittance Schedule Tool</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- SheetJS (xlsx-js-style) library for Excel export with Styles -->
+  <script src="https://cdn.jsdelivr.net/npm/xlsx-js-style@1.2.0/dist/xlsx.bundle.js"></script>
+  <!-- Google Fonts (Inter) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Heroicons -->
+  <script src="https://unpkg.com/heroicons@2.1.1/24/outline/index.js"></script>
 
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-    </style>
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #050214;
+      background-image: radial-gradient(circle at top left, rgba(67, 56, 202, 0.3), transparent 30%), radial-gradient(circle at bottom right, rgba(109, 40, 217, 0.2), transparent 40%);
+    }
+
+    .glow-border {
+      position: relative;
+    }
+
+    .glow-border::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border-radius: 0.75rem;
+      /* 12px */
+      border: 1px solid transparent;
+      background: linear-gradient(to right, rgba(109, 40, 217, 0.5), rgba(67, 56, 202, 0.5)) border-box;
+      -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: destination-out;
+      mask-composite: exclude;
+      z-index: -1;
+      transition: all 0.3s ease;
+    }
+
+    .glow-border:hover::before {
+      box-shadow: 0 0 15px rgba(109, 40, 217, 0.5);
+    }
+
+    .btn-glow {
+      background-image: linear-gradient(to right, #4f46e5, #7c3aed);
+      transition: all 0.3s ease;
+    }
+
+    .btn-glow:hover {
+      box-shadow: 0 0 20px rgba(109, 40, 217, 0.6);
+      transform: translateY(-2px);
+    }
+
+    .tab-active {
+      position: relative;
+      color: #c4b5fd;
+      /* violet-300 */
+    }
+
+    .tab-active::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background-color: #8b5cf6;
+      /* violet-500 */
+      box-shadow: 0 0 10px #8b5cf6;
+    }
+
+    .spinner {
+      border: 3px solid rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      border-top-color: #c4b5fd;
+      width: 20px;
+      height: 20px;
+      animation: spin 1s linear infinite;
+    }
+
+    .wht-spinner {
+      border: 4px solid rgba(255, 255, 255, 0.1);
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      border-left-color: #8b5cf6;
+      animation: spin 1s ease infinite;
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+  </style>
   <script type="importmap">
 {
   "imports": {
@@ -100,7 +117,10 @@
 }
 </script>
 </head>
-  <body class="text-slate-200">
-    <div id="root" class="p-4 sm:p-6 lg:p-8"></div>
-  </body>
+
+<body class="text-slate-200">
+  <div id="root" class="p-4 sm:p-6 lg:p-8"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+
 </html>
